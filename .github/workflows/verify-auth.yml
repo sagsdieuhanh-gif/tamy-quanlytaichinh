@@ -1,0 +1,33 @@
+name: Verify Supabase authentication frontend
+on:
+  push:
+    branches:
+      - feature/supabase-accounts
+  pull_request:
+    branches:
+      - main
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check JavaScript syntax
+        run: |
+          node --check auth.js
+          node <<'NODE'
+          const fs = require('node:fs');
+          const html = fs.readFileSync('index.html','utf8');
+          const match = html.match(/<script>([\s\S]*?)<\/script>/);
+          if(!match) throw new Error('Cannot find main app script');
+          fs.writeFileSync('/tmp/moc-inline.js',match[1]);
+          NODE
+          node --check /tmp/moc-inline.js
+      - name: Check auth integration and RLS
+        run: |
+          grep -q 'MocCloud.boot' index.html
+          grep -q 'auth.js' index.html
+          grep -q 'enable row level security' supabase/schema.sql
+          grep -q 'auth.uid()' supabase/schema.sql
+          grep -q 'to authenticated' supabase/schema.sql
