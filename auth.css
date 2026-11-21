@@ -1,0 +1,55 @@
+
+/* Mộc Finance · Premium mobile-first account experience */
+html.cloud-locked #app,html.cloud-locked #modal-root,html.cloud-locked #toast-root { visibility:hidden!important; }
+#moc-account-gate:empty{display:none}
+#moc-account-gate{font-family:'Be Vietnam Pro',system-ui,-apple-system,sans-serif;position:fixed;inset:0;z-index:1000;overflow-y:auto;background:#f8faf6;color:#19362c}
+.account-layout{min-height:100vh;display:grid;grid-template-columns:minmax(380px,44%) minmax(0,56%)}
+.account-art{background:linear-gradient(153deg,#123d35,#21664e 71%,#2a7359);position:relative;overflow:hidden;color:#eff7dd;min-height:100vh;padding:44px clamp(26px,4.8vw,78px);display:flex;flex-direction:column;justify-content:space-between}
+.account-art:before{content:'';position:absolute;width:570px;height:570px;border:1px solid #e8f6cf30;border-radius:50%;bottom:-180px;right:-280px;box-shadow:0 0 0 70px #eef8ce0a,0 0 0 140px #eef8ce06}
+.account-art:after{content:'';position:absolute;width:350px;height:350px;border:1px solid #e8f6cf20;border-radius:50%;top:-140px;left:-200px;box-shadow:0 0 0 50px #eef8ce08}
+.account-brand{position:relative;z-index:2;font-size:46px;font-weight:800;letter-spacing:-.13em}
+.account-art-center{position:relative;z-index:2}
+.account-art-symbol{width:76px;height:76px;border:1px solid #f3f7d638;border-radius:26px;display:grid;place-items:center;font-size:43px;margin-bottom:40px;background:#ffffff10;transform:rotate(-8deg)}
+.account-kicker{font-size:10px!important;letter-spacing:.24em;color:#b3d6bd!important;font-weight:800!important;margin-bottom:20px!important}
+.account-art-center h2{font-size:clamp(37px,4vw,61px);font-weight:800;line-height:1.19;letter-spacing:-.065em;margin-bottom:22px}
+.account-art-center>p:last-child{color:#c4dbcb;font-size:14px;line-height:2;max-width:345px}
+.account-art-bottom{z-index:2;position:relative;display:flex;gap:20px;flex-wrap:wrap;color:#b6d7bf;font-size:10px;font-weight:650}
+.account-main{display:flex;align-items:center;justify-content:center;padding:70px clamp(24px,6vw,90px)}
+.account-card{width:100%;max-width:430px;margin:auto}
+.account-eyebrow{font-size:10px;letter-spacing:.18em;font-weight:800;color:#477e65;margin-bottom:18px}
+.account-card h1{font-size:clamp(29px,3vw,39px);line-height:1.25;letter-spacing:-.06em;margin:0;color:#19362c;font-weight:800}
+.account-subtitle{font-size:12px;line-height:1.8;color:#81918a;margin:12px 0 28px}
+.account-tabs{background:#edf2ec;border-radius:15px;display:grid;grid-template-columns:1fr 1fr;padding:5px;margin-bottom:25px}
+.account-tabs button{border:0;background:transparent;padding:12px 8px;font-size:12px;font-weight:700;color:#8a9990;border-radius:11px;cursor:pointer}
+.account-tabs button.selected{background:#fff;color:#174f45;box-shadow:0 3px 12px #183f2f12}
+.auth-fields{display:flex;flex-direction:column;gap:9px}
+.auth-label{color:#30473c;font-weight:800;font-size:11px;margin-top:4px}
+.auth-fields>input,.auth-password>input{width:100%;min-height:53px;padding:14px 17px;border:1px solid #e2eae2;background:white;outline:0;border-radius:14px;color:#203d32;font-family:inherit;font-size:13px;box-shadow:0 4px 14px #1c51350a}
+.auth-fields input:focus{border-color:#63a98a;box-shadow:0 0 0 3px #b3dfc960}
+.auth-fields input::placeholder{color:#adbbb0}
+.auth-password{position:relative}
+.auth-password input{padding-right:77px}
+.auth-password>button{position:absolute;right:9px;top:9px;bottom:9px;border:0;border-radius:10px;padding:0 12px;background:#f0f5f0;color:#38684d;font-size:11px;font-weight:800}
+.auth-forgot{border:0;background:transparent;color:#326b55;padding:13px 0;font-size:11px;font-weight:700;display:block;margin-left:auto}
+.auth-submit{display:flex;align-items:center;justify-content:center;position:relative;width:100%;min-height:54px;background:#174f45;color:white;border:0;border-radius:15px;font-weight:800;font-size:12px;margin-top:22px;cursor:pointer;box-shadow:0 13px 27px #154d3f23}
+.auth-submit span{position:absolute;right:18px;font-size:20px;font-weight:400}
+.auth-submit:disabled{opacity:.7}
+.auth-submit:hover:not(:disabled){background:#286b57}
+.auth-switch{text-align:center;margin-top:26px;font-size:11px;color:#8d9991}
+.auth-switch button,.auth-text-btn{border:0;background:transparent;color:#276b53;font-size:11px;font-weight:800;cursor:pointer;padding:5px}
+.auth-text-btn{display:block;margin:23px auto}
+.auth-privacy{text-align:center;border-top:1px solid #e3eae1;color:#93a097;font-size:10px;line-height:1.85;margin-top:30px;padding-top:23px}
+.account-message{padding:13px 15px;border-radius:13px;background:#e9f5e9;color:#286447;font-size:11px;line-height:1.7;margin-bottom:20px;border:1px solid #cfebd1}
+.account-message.account-error{background:#fff1f0;color:#b74441;border-color:#ffd9d5}
+.account-helper{font-size:11px;color:#869b8d;margin-bottom:16px}
+.account-mobile-brand{display:none}
+.account-loading{min-height:100vh;padding:30px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;background:#f7f9f4;color:#19362c}
+.account-loading .account-mark{width:70px;height:70px;display:grid;place-items:center;border-radius:24px;background:#174f45;color:#eff7dd;font-size:39px;letter-spacing:-.12em;font-weight:800;margin-bottom:30px}
+.account-spinner{width:27px;height:27px;border-radius:50%;border:3px solid #dae9dc;border-top-color:#277157;animation:account-spin .8s linear infinite;margin-bottom:16px}
+@keyframes account-spin{to{transform:rotate(360deg)}}
+.account-loading h2{font-size:20px;margin:0 0 7px}.account-loading p{color:#86998a;font-size:11px}
+.cloud-account-panel{border:1px solid #b9d9c7;background:linear-gradient(155deg,var(--surface),var(--green-soft))}
+.cloud-chip{background:var(--green-soft);color:var(--green);padding:5px 12px;font-size:10px;font-weight:800;border-radius:30px}
+.cloud-help{font-size:10px;color:var(--muted-strong);line-height:1.8;padding:12px 4px 0}
+@media (max-width:950px){.account-layout{grid-template-columns:41% 59%}.account-art{padding:36px 29px}.account-main{padding:36px}}
+@media (max-width:700px){.account-layout{display:block}.account-art{display:none}.account-main{min-height:100dvh;display:flex;align-items:center;justify-content:center;padding:30px 23px max(30px,env(safe-area-inset-bottom))}.account-mobile-brand{display:flex;align-items:center;gap:9px;font-size:15px;color:#174f45;font-weight:800;letter-spacing:-.04em;margin-bottom:36px}.account-mobile-brand span{width:33px;height:33px;background:#174f45;color:#fff;display:grid;place-items:center;border-radius:11px;font-size:22px;letter-spacing:-.1em}.account-card{max-width:420px}.account-card h1{font-size:30px}.account-subtitle{margin-bottom:22px}.account-tabs{margin-bottom:22px}.auth-privacy{margin-top:27px}}
