@@ -3,14 +3,20 @@
 (() => {
   'use strict';
   const config = window.MOC_SUPABASE_CONFIG || {};
-  const enabled = /^https:\/\/[a-z0-9-]+\.supabase\.co$/.test(config.url || '')
-    && /^sb_publishable_/.test(config.publishableKey || '')
-    && typeof window.supabase?.createClient === 'function';
-  if (!enabled) {
+  const configured = /^https:\/\/[a-z0-9-]+\.supabase\.co$/.test(config.url || '') && /^sb_publishable_/.test(config.publishableKey || '');
+  if (!configured) {
     window.MocCloud = { enabled: false, accountPanel: () => '', boot: () => {} };
     return;
   }
   document.documentElement.classList.add('cloud-locked');
+  if (typeof window.supabase?.createClient !== 'function') {
+    window.MocCloud = {enabled:true, save:()=>false, accountPanel:()=>'', boot:()=>{
+      const g=document.createElement('div');g.id='moc-account-gate';
+      g.innerHTML='<div class="account-loading"><div class="account-mark">m.</div><h2>Không kết nối được hệ thống đăng nhập</h2><p>Hãy kết nối Internet rồi tải lại trang để sử dụng Mộc Finance.</p><button class="auth-submit" onclick="location.reload()" style="max-width:240px">Tải lại trang</button></div>';
+      document.body.appendChild(g);
+    }};
+    return;
+  }
   const supa = window.supabase.createClient(config.url, config.publishableKey, {
     auth: { autoRefreshToken: true, persistSession: true, detectSessionInUrl: true }
   });
@@ -203,13 +209,13 @@
     supa.auth.onAuthStateChange((event,session)=>{
       if(event==='PASSWORD_RECOVERY'){sync.gate='reset';sync.error='';sync.notice='';form('reset');return;}
       if(event==='SIGNED_OUT'){lock();return;}
-      if(session?.user) setTimeout(()=>activate(session.user),0);
+      if(session?.user && sync.gate!=='reset') setTimeout(()=>activate(session.user),0);
     });
     try{
       const {data,error}=await supa.auth.getSession();
       if(error)throw error;
-      if(data.session?.user)await activate(data.session.user);
-      else lock();
+      if(data.session?.user && sync.gate!=='reset')await activate(data.session.user);
+      else if(sync.gate!=='reset')lock();
     }catch(err){sync.error=displayError(err);form('signin');}
   }
   window.MocCloud={enabled:true,boot,save:queueSave,accountPanel};
