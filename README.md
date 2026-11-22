@@ -10,7 +10,7 @@ Thiết kế lại từ bố cục: sidebar xanh mực trên desktop, giao diệ
 
 **Đã kiểm thử:** giao diện 350px, 390px, 1440px không tràn ngang, mở nhập chi tiêu, thêm thẻ, quẹt thẻ, trả nợ, Tamy Smart, và trường hợp không hạch toán trả thẻ thành chi tiêu lần hai. Script không có lỗi khi tải.
 
-**Dữ liệu:** giữ nguyên khóa `moc-finance-v1` cùng sao lưu IndexedDB; chưa có đăng nhập/đồng bộ đám mây. Chỉ lưu trên thiết bị; xuất sao lưu JSON định kỳ.
+**Dữ liệu:** giữ nguyên khóa `moc-finance-v1` cùng sao lưu IndexedDB. Có thêm tính năng sao lưu/khôi phục Google Drive tự chọn; cần cấu hình OAuth Client ID trước khi sử dụng. Không có đồng bộ realtime giữa các thiết bị.
 
 ## Tính năng
 
@@ -21,7 +21,7 @@ Thiết kế lại từ bố cục: sidebar xanh mực trên desktop, giao diệ
 - Ngân sách theo danh mục, biểu đồ và báo cáo theo tháng.
 - Lịch sử giao dịch với tìm kiếm, bộ lọc, sửa và xóa.
 - Quản lý nhiều ví, danh mục, tùy chỉnh tên hiển thị, chế độ sáng/tối.
-- Xuất CSV, sao lưu và khôi phục JSON.
+- Xuất CSV, sao lưu và khôi phục JSON. **Sao lưu/khôi phục Google Drive** qua OAuth (sau khi cấu hình Client ID), tùy chọn tự sao lưu khi trang đang mở.
 - Giao diện responsive với font hệ thống dễ đọc, chữ mặc định lớn hơn và lựa chọn **Dễ đọc / Chữ lớn / Rất lớn** trong Cài đặt.
 - Thanh điều hướng dưới thuận tay, hỗ trợ PWA để thêm vào màn hình chính.
 
@@ -37,9 +37,15 @@ Thiết kế lại từ bố cục: sidebar xanh mực trên desktop, giao diệ
 
 **Tamy Smart 2.3 là bộ phân tích theo công thức/quy tắc, chưa phải chatbot sử dụng mô hình AI tạo sinh.** Toàn bộ tính toán diễn ra trong trình duyệt, không gửi lịch sử tài chính sang nhà cung cấp AI. Muốn nâng cấp thành AI hội thoại thực sự cần backend an toàn (ví dụ Supabase Edge Functions) và lưu API key ở máy chủ, không đặt trong JavaScript công khai của GitHub Pages.
 
+## Sao lưu Google Drive (tùy chọn)
+
+Vào **Cài đặt → Google Drive** để nhập **OAuth Client ID** và kết nối tài khoản Google. Mã Client ID phải được tạo trên Google Cloud Console; không nhập Client Secret. Tamy sử dụng phạm vi `drive.file` để quản lý tệp sao lưu mà ứng dụng tạo hoặc được cấp quyền. Tệp sao lưu tên `Tamy-Vi-Tai-Chinh-Backup.json` trong Drive của người dùng.
+
+Bản sao Google Drive **không đồng bộ thời gian thực**; bạn phải chọn khôi phục khi chuyển thiết bị. Tự sao lưu chỉ chạy khi đã kết nối Google, tạo bản sao lưu đầu tiên và vẫn đang mở ứng dụng. Dữ liệu JSON trên Google Drive không được mã hóa đầu cuối. **Chi tiết từng bước:** [GOOGLE_DRIVE_SETUP.md](GOOGLE_DRIVE_SETUP.md).
+
 ## Dữ liệu và quyền riêng tư
 
-Bản đang phát hành là **ứng dụng lưu cục bộ** trong trình duyệt: dữ liệu chính lưu ở `localStorage` và bản dự phòng tự động lưu trong `IndexedDB` trên **cùng thiết bị**. Nếu khóa lưu chính bị xóa nhưng IndexedDB vẫn tồn tại, ứng dụng có thể phục hồi. Hai lớp lưu trữ này không phải dịch vụ đám mây. Dữ liệu chưa được đồng bộ giữa điện thoại và máy tính, chưa có liên kết ngân hàng hoặc tài khoản đăng nhập thực tế. Tài khoản Supabase và đồng bộ đang được phát triển tại [nhánh feature/supabase-accounts](https://github.com/sagsdieuhanh-gif/tamy-quanlytaichinh/pull/1), chưa đưa lên production do chưa có dự án Supabase riêng.
+Bản đang phát hành là **ứng dụng lưu cục bộ** trong trình duyệt: dữ liệu chính lưu ở `localStorage` và bản dự phòng tự động lưu trong `IndexedDB` trên **cùng thiết bị**. Nếu khóa lưu chính bị xóa nhưng IndexedDB vẫn tồn tại, ứng dụng có thể phục hồi. Hai lớp lưu trữ này không phải dịch vụ đám mây. Sao lưu Google Drive là tính năng bổ sung tùy chọn, chỉ hoạt động sau khi thiết lập OAuth; dữ liệu chưa tự đồng bộ tức thời giữa điện thoại và máy tính, chưa có liên kết ngân hàng hoặc tài khoản đăng nhập thực tế. Tài khoản Supabase và đồng bộ đang được phát triển tại [nhánh feature/supabase-accounts](https://github.com/sagsdieuhanh-gif/tamy-quanlytaichinh/pull/1), chưa đưa lên production do chưa có dự án Supabase riêng.
 
 **Giữ nguyên khóa lưu dữ liệu cũ** `moc-finance-v1` nhằm bảo toàn lịch sử thu chi của người đã sử dụng Mộc Finance trên cùng trình duyệt. Không đổi tên key khi cập nhật giao diện.
 

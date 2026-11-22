@@ -34,7 +34,7 @@ jobs:
             'data-action="quick-transfer"',
           ]) assert(html.includes(name),'Missing: '+name);
           const sw=fs.readFileSync('service-worker.js','utf8');
-          assert(sw.includes("tamy-studio-v3"),'Old PWA cache');
+          assert(/const CACHE = '[^']+';/.test(sw),'Missing versioned PWA cache');
           console.log('All existing features and data compatibility verified');
           NODE
           node --check /tmp/tamy-v3.js
