@@ -1,4 +1,4 @@
--- Mộc Finance: each Supabase Auth user owns exactly one JSON finance document.
+-- Tamy Ví tài chính: each Supabase Auth user owns exactly one JSON finance document.
 -- Run this in a dedicated Supabase project (SQL Editor or MCP apply_migration).
 create table if not exists public.finance_states (
   user_id uuid primary key references auth.users(id) on delete cascade,
