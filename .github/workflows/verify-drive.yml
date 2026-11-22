@@ -1,0 +1,40 @@
+name: Verify Google Drive backup
+on:
+  push:
+    branches:
+      - feature/google-drive-backup
+  pull_request:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check JavaScript and backup contracts
+        run: |
+          node --check drive.js
+          node --check drive-config.js
+          node <<'NODE'
+          const fs=require('node:fs');
+          const assert=require('node:assert/strict');
+          const html=fs.readFileSync('index.html','utf8');
+          const scripts=[...html.matchAll(/<script>([\s\S]*?)<\/script>/g)];
+          assert(scripts.length>0,'Missing main script');
+          fs.writeFileSync('/tmp/tamy-index-main.js',scripts.at(-1)[1]);
+          assert(html.includes("const STORAGE_KEY = 'moc-finance-v1'"),'Old user data compatibility lost');
+          assert(html.includes('window.TamyDrive?.init?.'),'Missing Drive initialization');
+          assert(html.includes('window.TamyDrive?.panel?.()'),'Missing settings panel');
+          assert(html.includes("source:'drive'"),'Restore source must be tracked');
+          const drive=fs.readFileSync('drive.js','utf8');
+          assert(drive.includes('https://www.googleapis.com/auth/drive.file'),'Wrong Drive scope');
+          assert(drive.includes('Tamy-Vi-Tai-Chinh-Backup.json'),'Missing backup file name');
+          assert(drive.includes('prepareRestore(doc.data)'),'Missing validated restore flow');
+          const config=fs.readFileSync('drive-config.js','utf8');
+          assert(config.includes('clientId'),'Missing OAuth configuration');
+          const sw=fs.readFileSync('service-worker.js','utf8');
+          assert(sw.includes("'./drive.js'")&&sw.includes("'./drive-config.js'"),'PWA must cache Drive scripts');
+          console.log('Google Drive backup integration verified');
+          NODE
+          node --check /tmp/tamy-index-main.js
