@@ -1,4 +1,4 @@
-# Supabase + GitHub Pages setup (Mộc Finance)
+# Supabase + GitHub Pages setup (Tamy Ví tài chính)
 
 ## Status
 
