@@ -8,12 +8,26 @@
 
 - Ghi **chi tiêu**, **thu nhập** hoặc **chuyển tiền giữa các ví** chỉ trong vài thao tác.
 - Dashboard trực quan: tổng số dư, thu/chi theo tháng, tiền còn lại và tỷ lệ tiết kiệm.
+- **Quản lý thẻ tín dụng:** nhiều thẻ, hạn mức, dư nợ, tỷ lệ dùng hạn mức, ngày chốt sao kê / hạn thanh toán dự kiến, lịch sử quẹt thẻ và thanh toán.
+- **Tamy Smart:** phân tích tự động ngay trên thiết bị: cảnh báo vượt ngân sách, thẻ đến hạn, chi tiêu tăng, gợi ý tiết kiệm và hỏi đáp theo mẫu bằng số liệu thực tế.
 - Ngân sách theo danh mục, biểu đồ và báo cáo theo tháng.
 - Lịch sử giao dịch với tìm kiếm, bộ lọc, sửa và xóa.
 - Quản lý nhiều ví, danh mục, tùy chỉnh tên hiển thị, chế độ sáng/tối.
 - Xuất CSV, sao lưu và khôi phục JSON.
 - Giao diện responsive với font hệ thống dễ đọc, chữ mặc định lớn hơn và lựa chọn **Dễ đọc / Chữ lớn / Rất lớn** trong Cài đặt.
 - Thanh điều hướng dưới thuận tay, hỗ trợ PWA để thêm vào màn hình chính.
+
+## Nguyên tắc hạch toán thẻ tín dụng
+
+- **Quẹt thẻ**: tính vào chi tiêu của ngày quẹt; tăng dư nợ, giảm hạn mức khả dụng; **không** trừ ví ngân hàng/tiền mặt ngay.
+- **Trả nợ thẻ**: trừ ví nguồn và giảm dư nợ; **không cộng vào chi tiêu lần thứ hai**.
+- Ngày thanh toán trên giao diện chỉ là **ước tính theo ngày chốt và ngày trả tự khai**, không thay thế sao kê thực tế; dư nợ đầu kỳ có thể không có kỳ thanh toán xác định.
+- Không lưu số thẻ đầy đủ, CVV, mã PIN hoặc mật khẩu ngân hàng. Có thể lưu tên thẻ và 4 số cuối không bắt buộc.
+- Dữ liệu thẻ và số liệu Tamy Smart được sao lưu qua JSON, CSV và IndexedDB cùng các ví/giao dịch khác.
+
+## Tamy Smart là gì?
+
+**Tamy Smart 2.3 là bộ phân tích theo công thức/quy tắc, chưa phải chatbot sử dụng mô hình AI tạo sinh.** Toàn bộ tính toán diễn ra trong trình duyệt, không gửi lịch sử tài chính sang nhà cung cấp AI. Muốn nâng cấp thành AI hội thoại thực sự cần backend an toàn (ví dụ Supabase Edge Functions) và lưu API key ở máy chủ, không đặt trong JavaScript công khai của GitHub Pages.
 
 ## Dữ liệu và quyền riêng tư
 
