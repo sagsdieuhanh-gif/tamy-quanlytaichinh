@@ -1,13 +1,13 @@
 {
-  "name": "Mộc — Quản lý thu chi",
-  "short_name": "Mộc Finance",
-  "description": "Sổ tay thu chi, ngân sách và ví tiền cá nhân.",
+  "name": "Tamy Ví tài chính",
+  "short_name": "Tamy",
+  "description": "Ghi thu chi thật dễ. Quản lý ví, ngân sách và báo cáo trên điện thoại.",
   "lang": "vi",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
-  "background_color": "#f7f8f4",
-  "theme_color": "#174f45",
+  "background_color": "#f7f8f5",
+  "theme_color": "#175c4b",
   "icons": [
     {
       "src": "./icon-192.png",
