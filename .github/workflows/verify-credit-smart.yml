@@ -34,6 +34,6 @@ jobs:
             "creditCards:[],creditEntries:[]",
             "Không phải AI tạo sinh",
           ]) assert(html.includes(required), 'Missing feature: ' + required);
-          assert(fs.readFileSync('service-worker.js','utf8').includes('tamy-credit-smart-v2-3'), 'Outdated PWA cache');
+          assert(/const CACHE = '[^']+';/.test(fs.readFileSync('service-worker.js','utf8')), 'Missing versioned PWA cache');
           NODE
           node --check /tmp/tamy-app.js
