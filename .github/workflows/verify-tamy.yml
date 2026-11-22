@@ -1,0 +1,35 @@
+name: Verify Tamy premium UI
+on:
+  push:
+    branches:
+      - feature/tamy-premium-mobile
+  pull_request:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate assets, branding and data compatibility
+        run: |
+          node <<'NODE'
+          const fs=require('node:fs');
+          const assert=require('node:assert/strict');
+          const html=fs.readFileSync('index.html','utf8');
+          const scripts=[...html.matchAll(/<script(?: [^>]*)?>([\s\S]*?)<\/script>/g)].map(m=>m[1]).filter(Boolean);
+          assert(scripts.length>=1,'Missing JS');
+          fs.writeFileSync('/tmp/tamy-app.js',scripts.at(-1));
+          assert(html.includes('Tamy Ví tài chính'),'Missing brand');
+          assert(html.includes('tamy-insights'),'Missing dashboard insights');
+          assert(html.includes("const STORAGE_KEY = 'moc-finance-v1'"),'Legacy storage must remain compatible');
+          assert(!html.includes('Mộc Finance'),'Legacy brand remains in app');
+          assert(fs.existsSync('icon.svg'),'Missing icon');
+          assert(fs.existsSync('icon-192.png'),'Missing PWA 192 icon');
+          assert(fs.existsSync('icon-512.png'),'Missing PWA 512 icon');
+          const manifest=JSON.parse(fs.readFileSync('manifest.webmanifest','utf8'));
+          assert.equal(manifest.name,'Tamy Ví tài chính');
+          console.log('Tamy UI assets validated.');
+          NODE
+          node --check /tmp/tamy-app.js

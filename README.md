@@ -1,46 +1,40 @@
-# Mộc Finance 🌿
+# Tamy Ví tài chính ✨
 
-Ứng dụng web quản lý thu chi cá nhân bằng tiếng Việt, thiết kế **mobile-first** để sử dụng trên điện thoại.
+**Ví tài chính dễ nhìn, dễ nhập, dễ kiểm soát** — website quản lý thu chi cá nhân bằng tiếng Việt, thiết kế dành cho màn hình điện thoại.
 
-## Website
-
-Khi GitHub Pages được bật, website có địa chỉ:
-
-**https://sagsdieuhanh-gif.github.io/tamy-quanlytaichinh/**
-
-## Triển khai GitHub Pages
-
-1. Mở **Settings → Pages**: https://github.com/sagsdieuhanh-gif/tamy-quanlytaichinh/settings/pages
-2. Trong **Build and deployment → Source**, chọn **GitHub Actions** (không phải Deploy from a branch).
-3. GitHub sẽ chạy workflow **Deploy Mộc Finance to GitHub Pages** tại tab **Actions**; nếu chưa chạy, chọn **Run workflow**.
-4. Sau khi thành công, mở website trên điện thoại. Trên iPhone: Safari → Chia sẻ → Thêm vào Màn hình chính. Trên Android: Chrome → ⋮ → Cài đặt ứng dụng/Thêm vào màn hình chính.
+🌐 **Website:** https://sagsdieuhanh-gif.github.io/tamy-quanlytaichinh/
 
 ## Tính năng
 
-- Tổng quan số dư, thu nhập, chi tiêu và báo cáo theo tháng.
-- Thêm, sửa, xóa giao dịch chi/thu/chuyển ví.
-- Ví tiền, danh mục và ngân sách theo tháng.
-- Biểu đồ thống kê, tìm kiếm, lọc giao dịch.
+- Ghi **chi tiêu**, **thu nhập** hoặc **chuyển tiền giữa các ví** chỉ trong vài thao tác.
+- Dashboard trực quan: tổng số dư, thu/chi theo tháng, tiền còn lại và tỷ lệ tiết kiệm.
+- Ngân sách theo danh mục, biểu đồ và báo cáo theo tháng.
+- Lịch sử giao dịch với tìm kiếm, bộ lọc, sửa và xóa.
+- Quản lý nhiều ví, danh mục, tùy chỉnh tên hiển thị, chế độ sáng/tối.
 - Xuất CSV, sao lưu và khôi phục JSON.
-- Chế độ sáng/tối, giao diện responsive, hỗ trợ thêm vào màn hình chính.
-- Sau lần truy cập đầu tiên, service worker hỗ trợ sử dụng offline.
+- Giao diện responsive, thanh điều hướng dưới thuận tay, hỗ trợ PWA để thêm vào màn hình chính.
 
 ## Dữ liệu và quyền riêng tư
 
-Ứng dụng thuần frontend, không sử dụng backend. Dữ liệu được lưu trong `localStorage` của **chính trình duyệt trên thiết bị**, không đẩy lên GitHub hoặc tài khoản ngân hàng. Không có đồng bộ giữa các thiết bị và chưa có liên kết ngân hàng. Nên sao lưu JSON định kỳ; không nhập mật khẩu, số thẻ hay dữ liệu nhạy cảm khác vào app.
+Bản đang phát hành là **ứng dụng lưu cục bộ** trong trình duyệt. Dữ liệu chưa được đồng bộ giữa điện thoại và máy tính, chưa có liên kết ngân hàng hoặc tài khoản đăng nhập thực tế. Tài khoản Supabase và đồng bộ đang được phát triển tại [nhánh feature/supabase-accounts](https://github.com/sagsdieuhanh-gif/tamy-quanlytaichinh/pull/1), chưa đưa lên production do chưa có dự án Supabase riêng.
 
-Dữ liệu minh họa chỉ để trải nghiệm; hãy chọn tạo sổ trống trước khi sử dụng thực tế.
+**Giữ nguyên khóa lưu dữ liệu cũ** `moc-finance-v1` nhằm bảo toàn lịch sử thu chi của người đã sử dụng Mộc Finance trên cùng trình duyệt. Không đổi tên key khi cập nhật giao diện.
 
-## Phát triển
+Nên xuất sao lưu JSON định kỳ, đặc biệt trước khi đổi điện thoại/xóa dữ liệu trình duyệt. Dữ liệu minh họa cần được thay bằng sổ trống trước khi dùng thực tế.
 
-Tất cả giao diện và xử lý chính nằm trong `index.html`, không cần npm/build. `manifest.webmanifest`, `service-worker.js` và các icon phục vụ cài lên màn hình chính.
+## Cài lên điện thoại
 
-Local:
+- **iPhone:** Safari → Chia sẻ → Thêm vào Màn hình chính.
+- **Android:** Chrome → ⋮ → Thêm vào màn hình chính / Cài đặt ứng dụng.
+
+## Triển khai
+
+Repository dùng GitHub Pages → GitHub Actions. Workflow `Deploy Tamy Ví tài chính to GitHub Pages` tự động xuất bản phiên bản mới sau mỗi lần cập nhật nhánh main.
+
+Mã nguồn thuần HTML/CSS/JavaScript, không cần build. Để thử trên máy:
+
 ```bash
 python3 -m http.server 8000
 ```
+
 Mở http://localhost:8000.
-
-## Công nghệ
-
-HTML, CSS, JavaScript thuần · GitHub Pages · Progressive Web App (PWA).

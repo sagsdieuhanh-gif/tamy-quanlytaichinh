@@ -4,17 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
   <meta name="theme-color" content="#f7f8f4" />
-  <meta name="description" content="Mộc – Web app quản lý thu chi cá nhân, ngân sách và ví tiền. Đẹp, riêng tư và dễ sử dụng." />
+  <meta name="description" content="Tamy Ví tài chính – ứng dụng quản lý thu chi và ngân sách dễ dùng trên điện thoại." />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-  <meta name="apple-mobile-web-app-title" content="Mộc Finance" />
-  <link rel="icon" href="./icon.svg" type="image/svg+xml" />
-  <link rel="apple-touch-icon" href="./icon-192.png" />
-  <link rel="manifest" href="./manifest.webmanifest" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <title>Mộc — Tiền rõ ràng, sống nhẹ nhàng</title>
+  <meta name="apple-mobile-web-app-title" content="Tamy Ví tài chính" />
+  <title>Tamy Ví tài chính — Ghi thu chi thật dễ</title>
 
 <style>
 :root{--bg:#f7f8f4;--surface:#fff;--surface-2:#f5f7f3;--surface-3:#edf2ea;--ink:#18302a;--muted:#84918b;--muted-strong:#667971;--border:#e8eee8;--green:#174f45;--green-2:#276d5c;--green-soft:#e8f5e8;--green-light:#c3e8c9;--lime:#ebf5cb;--red:#e66c66;--red-soft:#fff0ec;--orange:#f6ac71;--purple:#947adc;--shadow:0 12px 42px rgba(25,58,44,.045);--shadow-strong:0 20px 68px rgba(18,52,42,.13);--radius:22px;--font:'Be Vietnam Pro',Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color-scheme:light}
@@ -55,16 +49,165 @@
 .chart-grid-label{font-size:15px}
 
 </style>
+<style>
+/* Tamy Ví tài chính · premium mobile-first design layer */
+:root {
+  --bg:#f7f8f5; --surface:#fff; --surface-2:#f7faf7; --surface-3:#edf3ed;
+  --ink:#19382f; --muted:#788c82; --muted-strong:#566f62; --border:#e7eee7;
+  --green:#175c4b; --green-2:#287a60; --green-soft:#e8f5ea; --green-light:#c9eacc;
+  --lime:#f1f5de; --red:#df746c; --red-soft:#fff0ec; --orange:#f2ac6e;
+  --shadow:0 14px 40px rgba(28,69,52,.055); --shadow-strong:0 23px 72px rgba(14,53,38,.18);
+  --radius:24px;
+}
+:root[data-theme="dark"]{
+  --bg:#101d19; --surface:#1b2b24; --surface-2:#22362d; --surface-3:#2c4336;
+  --ink:#e9f6ee; --muted:#95ab9f; --muted-strong:#b8cec0; --border:#355244;
+  --green:#b6ebc5; --green-2:#8fd9ab; --green-soft:#294639; --green-light:#466d52;
+  --lime:#2b4131; --red:#ffa39d; --red-soft:#452f31;
+  --shadow:0 14px 40px rgba(0,0,0,.15); --shadow-strong:0 25px 72px rgba(0,0,0,.3);
+}
+body{background:var(--bg);font-size:14px;line-height:1.62}
+.app-shell{min-height:100dvh}
+.main{padding-top:35px}
+.sidebar{width:264px;flex-basis:264px;background:var(--surface);padding:30px 18px 20px 23px;border-right:1px solid var(--border)}
+.brand{gap:11px}
+.brand-mark{background:linear-gradient(145deg,#12644c,#269475);color:#fff9dc;box-shadow:0 9px 24px rgba(30,124,88,.24);width:43px;height:43px;border-radius:15px;font-size:27px;letter-spacing:-.11em}
+.brand-name{font-size:23px;letter-spacing:-.082em;font-weight:800;color:var(--ink)}
+.brand-caption{font-size:9px;letter-spacing:.15em;font-weight:750;color:var(--muted)}
+.sidebar-label{letter-spacing:.17em;font-size:10px;color:var(--muted)}
+.nav-link{min-height:49px;border-radius:15px;font-size:12px;font-weight:700;padding:13px 14px}
+.nav-link.active{background:var(--green-soft);color:var(--green-2)}
+.sidebar-tip{border-radius:20px;background:linear-gradient(135deg,var(--green-soft),var(--lime));border:1px solid var(--border)}
+.sidebar-footer{border-top:1px solid var(--border)}
+.topbar{margin-bottom:27px}
+.page-title{font-size:30px;line-height:1.24;letter-spacing:-.065em}
+.eyebrow{letter-spacing:.09em;color:var(--green-2);font-weight:800}
+.month-nav{border-radius:15px;padding:5px;background:var(--surface);box-shadow:0 4px 18px rgba(15,67,44,.025)}
+.btn{border-radius:14px;font-weight:750;min-height:43px;transition:transform .18s ease,background .18s ease,box-shadow .18s ease}
+.btn:active,.quick-action:active,.fab:active{scale:.98}
+.btn-primary{background:#1b7056;color:white;box-shadow:0 10px 22px rgba(27,112,86,.16)}
+.btn-primary:hover{background:#155f49}
+.card,.wallet-card,.stat-tile{border-radius:24px;box-shadow:var(--shadow);border:1px solid var(--border)}
+.card{padding:24px}
+.section-head h2{font-size:19px;letter-spacing:-.055em}
+.section-head p{line-height:1.65}
+.page-intro{margin-bottom:20px}
+.hero{background:radial-gradient(circle at 100% 0%,#3d9980 0%,transparent 40%),linear-gradient(120deg,#114f40 1%,#1b7159 56%,#2b8668 100%);border:1px solid #ffffff26;border-radius:29px;padding:31px 34px;min-height:250px;box-shadow:0 24px 55px rgba(18,91,67,.21)}
+.hero:before{width:360px;height:360px;right:-106px;top:-182px;opacity:.92;box-shadow:0 0 0 48px rgba(255,255,255,.025),0 0 0 96px rgba(255,255,255,.02)}
+.hero:after{width:215px;height:215px;right:30px;bottom:-162px}
+.hero-content{z-index:1}
+.hero-label{font-size:11px;letter-spacing:.08em;font-weight:750;text-transform:uppercase;color:#d4f1df}
+.hero-badge{background:#ffffff22;border:1px solid #ffffff35;border-radius:999px;padding:6px 10px;font-size:10px;color:#f1fff5;backdrop-filter:blur(5px)}
+.hero-balance{font-size:clamp(35px,4.1vw,54px);font-weight:800;line-height:1.22;letter-spacing:-.08em;margin:13px 0 26px}
+.hero-balance small{font-size:17px;font-weight:650;color:#d3efdc}
+.hero-bottom{gap:20px}
+.hero-stat{gap:10px}
+.hero-stat-icon{width:40px;height:40px;background:#ffffff1b;border:1px solid #ffffff21;border-radius:14px}
+.hero-stat .label{font-size:11px;color:#d7ecdf}
+.hero-stat b{font-size:15px}
+.hero-wave{opacity:.22;right:1px;bottom:-16px}
+.quick-actions{gap:13px}
+.quick-action{min-height:77px;gap:12px;padding:15px 16px;background:var(--surface);border:1px solid var(--border);border-radius:21px;box-shadow:var(--shadow);transition:transform .18s ease,box-shadow .18s ease}
+.quick-action:hover{transform:translateY(-2px);box-shadow:0 14px 35px rgba(27,72,50,.11)}
+.quick-action .qa-icon{width:45px;height:45px;flex:0 0 45px;border-radius:16px}
+.quick-action b{font-size:12px;line-height:1.55}
+.quick-action small{font-size:11px;line-height:1.5}
+.tamy-insights{margin:16px 0 22px;display:grid;grid-template-columns:1fr 1fr;gap:13px}
+.tamy-insight{border:1px solid var(--border);background:var(--surface);border-radius:20px;padding:17px 19px;display:flex;align-items:center;gap:13px;min-width:0}
+.tamy-insight-icon{flex:0 0 43px;width:43px;height:43px;border-radius:15px;background:var(--green-soft);color:var(--green-2);display:grid;place-items:center}
+.tamy-insight:nth-child(2) .tamy-insight-icon{background:#fff3e8;color:#bf7e45}
+.tamy-insight small{display:block;color:var(--muted);font-size:10px;margin-bottom:2px}
+.tamy-insight b{display:block;font-size:15px;color:var(--ink);font-weight:800;letter-spacing:-.03em}
+.tamy-insight p{font-size:10px;color:var(--muted-strong);margin-top:2px;line-height:1.5}
+.stat-tile{background:var(--surface);padding:23px}
+.stat-tile .stat-amount{font-size:23px}
+.wallet-card{background:var(--surface);padding:23px}
+.wallet-card .wallet-amount{font-size:26px}
+.settings-row{min-height:70px}
+.form-control{border-radius:14px;min-height:49px;background:var(--surface-2);font-size:13px}
+.form-control:focus{outline:3px solid #8cd6b755;outline-offset:0;border-color:#68bd97}
+.modal-dialog{border-radius:27px}
+.type-switch{border-radius:15px}
+.category-option{border-radius:13px}
+.intro-strip{border-radius:17px;background:var(--green-soft);color:var(--green-2);border:1px solid var(--border)}
+/* Responsive, thumb-first controls */
+@media(max-width:920px){
+ .main{padding:22px 21px 134px}
+ .mobile-header{margin-bottom:23px}
+ .mobile-header .brand-mark{width:38px;height:38px;border-radius:13px;font-size:25px}
+ .mobile-header .brand-name{font-size:21px;letter-spacing:-.07em}
+ .mobile-header .header-icon{width:43px;height:43px;border-radius:15px;background:var(--surface);box-shadow:0 5px 16px #15362409}
+ .bottom-nav{left:12px;right:12px;bottom:10px;border:1px solid var(--border);border-radius:24px;padding:10px 10px calc(10px + env(safe-area-inset-bottom));background:color-mix(in srgb,var(--surface) 94%,transparent);backdrop-filter:blur(16px);box-shadow:0 12px 37px rgba(22,68,48,.16)}
+ .bottom-nav button{min-height:50px;gap:5px;font-size:10px;font-weight:700;border-radius:14px}
+ .bottom-nav button.active{color:var(--green-2)}
+ .bottom-nav button.active:before{top:-4px;width:24px;height:3px;border-radius:6px;background:var(--green-2)}
+ .fab{width:64px;height:64px;bottom:calc(49px + env(safe-area-inset-bottom));border:5px solid var(--bg);border-radius:21px;background:linear-gradient(145deg,#167158,#268866);box-shadow:0 14px 29px rgba(22,102,75,.31)}
+}
+@media(max-width:660px){
+ body{font-size:14px}
+ .main{padding:19px 16px 138px}
+ .topbar{margin-bottom:21px}
+ .page-title{font-size:24px;line-height:1.3}
+ .hero{min-height:238px;padding:24px 23px;border-radius:26px}
+ .hero-top{gap:8px}
+ .hero-badge{font-size:9px;padding:5px 8px}
+ .hero-label{font-size:10px}
+ .hero-balance{font-size:clamp(28px,8vw,39px);margin:15px 0 30px}
+ .hero-balance small{font-size:14px}
+ .hero-bottom{gap:13px}
+ .hero-stat{gap:8px}
+ .hero-stat-icon{width:35px;height:35px;border-radius:12px}
+ .hero-stat .label{font-size:10px}
+ .hero-stat b{font-size:12px}
+ .hero-divide{height:38px}
+ .quick-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+ .quick-action{padding:14px 12px;gap:9px;min-height:86px;flex-direction:row;align-items:center;text-align:left;border-radius:18px}
+ .quick-action .qa-icon{width:39px;height:39px;flex-basis:39px;border-radius:13px}
+ .quick-action b{font-size:11px}
+ .quick-action small{font-size:10px}
+ .quick-actions .quick-action:nth-child(3){grid-column:1/-1;min-height:63px}
+ .tamy-insights{grid-template-columns:1fr 1fr;gap:10px;margin:13px 0 18px}
+ .tamy-insight{padding:13px 12px;border-radius:18px;gap:9px;align-items:flex-start}
+ .tamy-insight-icon{width:34px;height:34px;flex-basis:34px;border-radius:11px}
+ .tamy-insight small{font-size:9px}
+ .tamy-insight b{font-size:12px}
+ .tamy-insight p{font-size:9px}
+ .card{padding:19px;border-radius:21px}
+ .section-head{align-items:center;flex-direction:row}
+ .section-head h2{font-size:17px}
+ .section-head .btn{font-size:10px;padding:8px 11px;min-height:39px}
+ .form-control{min-height:52px;font-size:14px;padding:13px}
+ .modal-dialog{border-radius:28px 28px 0 0;max-height:95dvh}
+ .modal-header{padding-top:27px}
+ .modal-content{padding-bottom:calc(24px + env(safe-area-inset-bottom))}
+ .bottom-nav{left:9px;right:9px;bottom:8px;padding:8px 6px calc(8px + env(safe-area-inset-bottom))}
+ .bottom-nav button{font-size:9px;min-height:50px}
+ .fab{bottom:calc(46px + env(safe-area-inset-bottom))}
+ .stat-tile .stat-amount{font-size:23px}
+}
+@media(max-width:385px){
+ .hero{padding:20px 17px}
+ .hero-balance{font-size:30px}
+ .hero-badge{font-size:8px}
+ .hero-stat-icon{display:none}
+ .quick-action{flex-direction:column;align-items:flex-start}
+ .quick-actions .quick-action:nth-child(3){flex-direction:row;align-items:center}
+ .tamy-insights{grid-template-columns:1fr}
+ .tamy-insight{align-items:center}
+}
+@media(hover:none){.quick-action:hover,.wallet-card:hover{transform:none}}
+
+</style>
 </head>
 <body>
   <div id="app" class="app-shell" aria-live="off">
-    <div class="boot-screen"><div class="boot-mark">m.</div><strong>Đang mở Mộc...</strong><span>Một chút an tâm cho tài chính của bạn.</span></div>
+    <div class="boot-screen"><div class="boot-mark">t.</div><strong>Đang mở Tamy...</strong><span>Một chút an tâm cho tài chính của bạn.</span></div>
   </div>
   <div id="modal-root"></div>
   <div id="toast-root" aria-live="polite"></div>
   <input type="file" id="import-input" accept="application/json,.json" hidden />
   <script>
-/* Mộc Finance · Mobile-first personal expense tracker
+/* Tamy Ví tài chính · Mobile-first personal expense tracker
    Vanilla JavaScript, no external runtime, all data stays on the user's device. */
 (() => {
 'use strict';
@@ -197,10 +340,10 @@ function setTheme(theme){document.documentElement.dataset.theme=theme==='dark'?'
 setTheme(state.settings.theme);
 function navButton([key,label,ico],mobile=false){return `<button class="${mobile?'bottom-link':'nav-link'} ${ui.view===key?'active':''}" data-action="nav" data-view="${key}" title="${escapeHtml(label)}" aria-label="${escapeHtml(label)}" aria-current="${ui.view===key?'page':'false'}">${icons(ico)}<span>${label}</span>${mobile?'':icons('chev-right','nav-chevron icon-xs')}</button>`;}
 function renderShell(){
- const [heading,subheading]={overview:['Xin chào, '+(state.settings.name||'Bạn')+' 👋','Hôm nay, mình cùng quản lý tiền thật nhẹ nhàng nhé.'],transactions:['Giao dịch','Mỗi khoản nhỏ đều đáng được ghi nhớ.'],budgets:['Ngân sách','Đặt giới hạn để ưu tiên điều quan trọng.'],wallets:['Ví & tài khoản','Mọi nguồn tiền đều trong tầm mắt.'],reports:['Báo cáo tài chính','Nhìn lại thói quen để chi tiêu thông minh.'],settings:['Cài đặt','Cá nhân hóa không gian tài chính của bạn.']}[ui.view];
+ const [heading,subheading]={overview:['Xin chào, '+(state.settings.name||'Bạn')+' 👋','Ghi nhanh hôm nay, an tâm cho ngày mai.'],transactions:['Giao dịch','Mỗi khoản nhỏ đều đáng được ghi nhớ.'],budgets:['Ngân sách','Đặt giới hạn để ưu tiên điều quan trọng.'],wallets:['Ví & tài khoản','Mọi nguồn tiền đều trong tầm mắt.'],reports:['Báo cáo tài chính','Nhìn lại thói quen để chi tiêu thông minh.'],settings:['Cài đặt','Cá nhân hóa không gian tài chính của bạn.']}[ui.view];
  document.getElementById('app').innerHTML=`
-  <aside class="sidebar" aria-label="Menu chính"><div class="brand"><span class="brand-mark">m.</span><span><span class="brand-name">mộc.</span><span class="brand-caption" style="display:block">PERSONAL FINANCE</span></span></div><div class="sidebar-label">KHÔNG GIAN CỦA BẠN</div><nav class="sidebar-nav">${NAV.map(n=>navButton(n)).join('')}</nav><div class="sidebar-spacer"></div><div class="sidebar-tip"><div class="tip-icon">${icons('sparkle','icon-sm')}</div><strong>Chi tiêu có chủ đích</strong><p>Hiểu dòng tiền của mình, từng ngày một.</p></div><div class="sidebar-footer"><div class="avatar">${escapeHtml((state.settings.name||'B').trim().charAt(0).toUpperCase())}</div><div><b>${escapeHtml(state.settings.name||'Bạn')}</b><span>${state.mode==='demo'?'Đang xem dữ liệu mẫu':'Tài chính cá nhân'}</span></div></div></aside>
-  <main class="main"><div class="mobile-header"><div class="brand"><span class="brand-mark">m.</span><span class="brand-name">mộc.</span></div><div class="header-right"><button class="header-icon" data-action="theme" aria-label="Đổi giao diện sáng tối">${icons(state.settings.theme==='dark'?'sun':'moon')}</button><button class="header-icon" data-action="nav" data-view="settings" aria-label="Cài đặt">${icons('settings')}</button></div></div>
+  <aside class="sidebar" aria-label="Menu chính"><div class="brand"><span class="brand-mark">t.</span><span><span class="brand-name">tamy.</span><span class="brand-caption" style="display:block">VÍ TÀI CHÍNH CỦA BẠN</span></span></div><div class="sidebar-label">KHÔNG GIAN CỦA BẠN</div><nav class="sidebar-nav">${NAV.map(n=>navButton(n)).join('')}</nav><div class="sidebar-spacer"></div><div class="sidebar-tip"><div class="tip-icon">${icons('sparkle','icon-sm')}</div><strong>Thảnh thơi với tiền bạc</strong><p>Mỗi khoản thu chi đều rõ ràng, vừa đủ và dễ kiểm soát.</p></div><div class="sidebar-footer"><div class="avatar">${escapeHtml((state.settings.name||'B').trim().charAt(0).toUpperCase())}</div><div><b>${escapeHtml(state.settings.name||'Bạn')}</b><span>${state.mode==='demo'?'Đang xem dữ liệu mẫu':'Ví tài chính của bạn'}</span></div></div></aside>
+  <main class="main"><div class="mobile-header"><div class="brand"><span class="brand-mark">t.</span><span class="brand-name">tamy.</span></div><div class="header-right"><button class="header-icon" data-action="theme" aria-label="Đổi giao diện sáng tối">${icons(state.settings.theme==='dark'?'sun':'moon')}</button><button class="header-icon" data-action="nav" data-view="settings" aria-label="Cài đặt">${icons('settings')}</button></div></div>
   <header class="topbar"><div><p class="eyebrow">${escapeHtml(subheading)}</p><h1 class="page-title">${escapeHtml(heading)}</h1></div><div class="top-actions">${ui.view!=='settings'?`<div class="month-nav"><button data-action="month-prev" aria-label="Tháng trước">${icons('chev-left','icon-sm')}</button><span>${monthLabel(ui.month)}</span><button data-action="month-next" aria-label="Tháng sau">${icons('chev-right','icon-sm')}</button></div>`:''}<button class="btn btn-primary top-add" data-action="add-transaction">${icons('plus','icon-sm')} Thêm giao dịch</button></div></header>
   <div class="main-content" id="page-content">${renderPage()}</div></main>
   <nav class="bottom-nav" aria-label="Điều hướng điện thoại">${NAV.slice(0,2).map(n=>navButton(n,true)).join('')}<button class="fab-space" tabindex="-1" aria-hidden="true"></button>${NAV.slice(2,5).map(n=>navButton(n,true)).join('')}</nav><button class="fab" data-action="add-transaction" aria-label="Thêm giao dịch">${icons('plus','icon-lg')}</button>`;
@@ -209,11 +352,15 @@ function renderShell(){
 function renderPage(){switch(ui.view){case'transactions':return renderTransactions();case'budgets':return renderBudgets();case'wallets':return renderWallets();case'reports':return renderReports();case'settings':return renderSettings();default:return renderOverview();}}
 function renderIntro(){return state.mode==='demo'?`<div class="intro-strip"><div style="display:flex;align-items:center;gap:10px;min-width:0">${icons('info','icon-sm')}<p><strong>Đây là dữ liệu minh họa.</strong> Tạo sổ riêng để bắt đầu quản lý tiền thật.</p></div><button class="btn btn-small" data-action="start-fresh">Bắt đầu</button></div>`:'';}
 function renderOverview(){const t=totals(),bal=totalBalance(),currBudgets=state.budgets.filter(b=>b.month===ui.month),latest=transactionsForMonth(ui.month).slice(0,5);
- return `${renderIntro()}<section class="hero"><div class="hero-content"><div class="hero-top"><div class="hero-label">Tổng số dư hiện tại</div><span class="hero-badge">${icons('shield','icon-xs')} Lưu ngay trên thiết bị</span></div><div class="hero-balance mono-num">${money(bal)} <small>đ</small></div><div class="hero-bottom"><div class="hero-stat"><span class="hero-stat-icon">${icons('arrow-down-left','icon-sm')}</span><div><div class="label">Thu nhập tháng</div><b class="mono-num">+${fullMoney(t.income)}</b></div></div><div class="hero-divide"></div><div class="hero-stat"><span class="hero-stat-icon">${icons('arrow-up-right','icon-sm')}</span><div><div class="label">Chi tiêu tháng</div><b class="mono-num">−${fullMoney(t.expense)}</b></div></div></div></div><svg class="hero-wave" viewBox="0 0 170 110"><path fill="none" stroke="white" stroke-width="5" d="M2 100C30 70 52 85 80 54S135 60 172 1"/></svg></section>
- <div class="space-top quick-actions"><button class="quick-action" data-action="quick-expense"><span class="qa-icon" style="background:#fff0e6;color:#d78050">${icons('arrow-up-right')}</span><span><b>Ghi khoản chi</b><small>Chỉ vài giây</small></span></button><button class="quick-action" data-action="quick-income"><span class="qa-icon" style="background:#e4f3e7;color:#408967">${icons('arrow-down-left')}</span><span><b>Thêm thu nhập</b><small>Ghi tiền vào</small></span></button><button class="quick-action" data-action="quick-transfer"><span class="qa-icon" style="background:#edeafd;color:#9075c8">${icons('swap')}</span><span><b>Chuyển ví</b><small>Điều chuyển tiền</small></span></button></div>
+ return `${renderIntro()}<section class="hero"><div class="hero-content"><div class="hero-top"><div class="hero-label">Tổng số dư hiện tại</div><span class="hero-badge">${icons('shield','icon-xs')} Lưu riêng trên máy</span></div><div class="hero-balance mono-num">${money(bal)} <small>đ</small></div><div class="hero-bottom"><div class="hero-stat"><span class="hero-stat-icon">${icons('arrow-down-left','icon-sm')}</span><div><div class="label">Thu nhập tháng</div><b class="mono-num">+${fullMoney(t.income)}</b></div></div><div class="hero-divide"></div><div class="hero-stat"><span class="hero-stat-icon">${icons('arrow-up-right','icon-sm')}</span><div><div class="label">Chi tiêu tháng</div><b class="mono-num">−${fullMoney(t.expense)}</b></div></div></div></div><svg class="hero-wave" viewBox="0 0 170 110"><path fill="none" stroke="white" stroke-width="5" d="M2 100C30 70 52 85 80 54S135 60 172 1"/></svg></section>
+ <div class="space-top quick-actions"><button class="quick-action" data-action="quick-expense"><span class="qa-icon" style="background:#fff0e6;color:#d78050">${icons('arrow-up-right')}</span><span><b>Ghi chi tiêu</b><small>Thao tác nhanh</small></span></button><button class="quick-action" data-action="quick-income"><span class="qa-icon" style="background:#e4f3e7;color:#408967">${icons('arrow-down-left')}</span><span><b>Ghi thu nhập</b><small>Tiền vào ví</small></span></button><button class="quick-action" data-action="quick-transfer"><span class="qa-icon" style="background:#edeafd;color:#9075c8">${icons('swap')}</span><span><b>Chuyển ví</b><small>Điều chuyển tiền</small></span></button></div>
+ <div class="tamy-insights" aria-label="Thông tin tài chính nhanh">
+   <div class="tamy-insight"><span class="tamy-insight-icon">${icons('piggy','icon-sm')}</span><div><small>Tiền giữ lại trong tháng</small><b class="mono-num ${t.income-t.expense<0?'bad':'good'}">${fullMoney(t.income-t.expense)}</b><p>Thu nhập trừ chi tiêu</p></div></div>
+   <div class="tamy-insight"><span class="tamy-insight-icon">${icons('target','icon-sm')}</span><div><small>Tỷ lệ tiết kiệm</small><b class="mono-num">${t.income>0?Math.round((t.income-t.expense)/t.income*100)+'%':'Chưa có thu nhập'}</b><p>Trong tháng đang xem</p></div></div>
+ </div>
  <div class="grid grid-2 space-top"><section class="card"><div class="section-head"><div><h2>Dòng tiền của bạn</h2><p>Chi tiêu lũy kế trong ${monthLabel(ui.month).toLowerCase()}</p></div><span class="overline">${monthLabel(ui.month)}</span></div>${lineChart(ui.month)}<div class="chart-note"><span>${icons('info','icon-xs')} Đồ thị thể hiện tổng chi tiêu tích lũy từng ngày</span><span class="chart-legend"><i class="legend-dot"></i> Chi tiêu</span></div></section><section class="card"><div class="section-head"><div><h2>Chi tiêu theo danh mục</h2><p>Tiền của bạn đang đi đâu?</p></div>${icons('chart-pie')}</div>${renderDonut(ui.month)}</section></div>
  <div class="grid grid-2 space-top"><section class="card"><div class="section-head"><div><h2>Giao dịch gần đây</h2><p>Những chuyển động trong ví</p></div><button class="link-button" data-action="nav" data-view="transactions">Xem tất cả ${icons('chev-right','icon-xs')}</button></div>${latest.length?`<div class="transaction-list">${latest.map(renderTxItem).join('')}</div>`:emptyBlock('receipt','Chưa có giao dịch','Ghi khoản thu hoặc chi đầu tiên để bắt đầu.','add-transaction','Thêm giao dịch')}</section><section class="card"><div class="section-head"><div><h2>Ngân sách của bạn</h2><p>Tiến độ chi tiêu trong tháng</p></div><button class="link-button" data-action="nav" data-view="budgets">Chi tiết ${icons('chev-right','icon-xs')}</button></div>${currBudgets.length?currBudgets.slice(0,4).map(b=>renderBudgetRow(b)).join(''):emptyBlock('target','Chưa đặt ngân sách','Thiết lập giới hạn chi tiêu cho từng danh mục.','add-budget','Tạo ngân sách')}</section></div>
- <div class="space-top tip-card"><span class="tip-icon">${icons('sparkle')}</span><div><h3>Nhỏ mỗi ngày, rõ cả tháng ✨</h3><p>Thói quen ghi chép ngay khi chi tiền sẽ giúp bạn nhận ra các khoản có thể tiết kiệm. Mộc lưu thông tin trực tiếp trên trình duyệt của bạn.</p></div></div>`;
+ <div class="space-top tip-card"><span class="tip-icon">${icons('sparkle')}</span><div><h3>Nhỏ mỗi ngày, rõ cả tháng ✨</h3><p>Thói quen ghi chép ngay khi chi tiền sẽ giúp bạn nhận ra các khoản có thể tiết kiệm. Tamy lưu thông tin trực tiếp trên trình duyệt của bạn.</p></div></div>`;
 }
 function emptyBlock(ico,heading,desc,action,label){return `<div class="empty-state"><div class="empty-icon">${icons(ico,'icon-lg')}</div><b>${escapeHtml(heading)}</b><p>${escapeHtml(desc)}</p>${action?`<button class="btn btn-soft btn-small" data-action="${action}">${icons('plus','icon-sm')} ${escapeHtml(label||'Thêm mới')}</button>`:''}</div>`;}
 function lineChart(ym){const days=monthDays(ym),ts=transactionsForMonth(ym),nums=Array.from({length:days},()=>0);ts.filter(t=>t.type==='expense').forEach(t=>{const day=Number(t.date.slice(8));if(day>0 && day<=days)nums[day-1]+=number(t.amount);});let v=0;const cum=nums.map(n=>(v+=n));const ymax=Math.max(1000000,...cum)*1.12;const W=640,H=213,L=50,R=15,T=12,B=28,plotW=W-L-R,plotH=H-T-B;const x=i=>L+i*plotW/Math.max(1,days-1),y=n=>T+plotH-n/ymax*plotH;const pts=cum.map((val,i)=>[x(i),y(val)]);const line=pts.map((p,i)=>`${i?'L':'M'}${p[0].toFixed(1)} ${p[1].toFixed(1)}`).join(' ');const area=`${line} L${x(days-1)} ${T+plotH} L${L} ${T+plotH} Z`;const ticks=[0,.25,.5,.75,1].map(fr=>{let yy=T+plotH*(1-fr);return `<line x1="${L}" y1="${yy}" x2="${W-R}" y2="${yy}" class="chart-grid-line"/><text class="chart-grid-label" x="${L-9}" y="${yy+3}" text-anchor="end">${compactMoney(ymax*fr)}</text>`;}).join('');const dates=[1,Math.round(days*.25),Math.round(days*.5),Math.round(days*.75),days].map(d=>`<text class="chart-grid-label" x="${x(d-1)}" y="${H-5}" text-anchor="middle">${d}/${Number(ym.slice(5))}</text>`).join('');return `<div class="chart-wrap"><svg class="line-chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="Biểu đồ chi tiêu lũy kế tháng ${escapeHtml(ym)}"><defs><linearGradient id="areaGradient" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#4aad87" stop-opacity=".20"/><stop offset="1" stop-color="#4aad87" stop-opacity=".005"/></linearGradient></defs>${ticks}${dates}<path d="${area}" class="chart-area"/><path d="${line}" class="chart-line"/>${cum.length?`<circle class="chart-dot" cx="${x(days-1)}" cy="${y(cum[days-1])}" r="5"><title>${fullMoney(cum[days-1])}</title></circle>`:''}</svg></div>`;}
@@ -232,10 +379,10 @@ function reportBars(){const months=sixMonths(),v=months.map(m=>({month:m,...tota
 function renderReports(){const t=totals(),prev=totals(shiftMonth(ui.month,-1)),change=prev.expense>0?Math.round((t.expense-prev.expense)/prev.expense*100):null,spends=categorySpends(),total=t.expense;return `${renderIntro()}<div class="grid grid-3 space-bottom"><div class="stat-tile"><div class="icon-top">${icons('arrow-down-left')}</div><p class="stat-label">Tổng thu nhập</p><div class="stat-amount mono-num good">${fullMoney(t.income)}</div><p class="stat-foot">${monthLabel(ui.month)}</p></div><div class="stat-tile"><div class="icon-top" style="color:var(--red)">${icons('arrow-up-right')}</div><p class="stat-label">Tổng chi tiêu</p><div class="stat-amount mono-num">${fullMoney(t.expense)}</div><p class="stat-foot">${change===null?'Chưa có dữ liệu tháng trước':`${change>=0?'+':''}${change}% so với tháng trước`}</p></div><div class="stat-tile"><div class="icon-top">${icons('piggy')}</div><p class="stat-label">Tiết kiệm ròng trong tháng</p><div class="stat-amount mono-num ${t.income-t.expense<0?'bad':'good'}">${fullMoney(t.income-t.expense)}</div><p class="stat-foot">Tỷ lệ giữ lại: ${t.income?Math.round((t.income-t.expense)/t.income*100)+'%':'—'}</p></div></div>
  <div class="grid grid-2"><section class="card"><div class="section-head"><div><h2>Thu nhập & chi tiêu</h2><p>So sánh trong 6 tháng gần đây</p></div>${icons('chart')}</div>${reportBars()}</section><section class="card"><div class="section-head"><div><h2>Cơ cấu chi tiêu</h2><p>Phân bổ theo từng danh mục</p></div>${icons('chart-pie')}</div>${renderDonut(ui.month)}</section></div>
  <div class="grid grid-2 space-top"><section class="card"><div class="section-head"><div><h2>Chi tiêu theo danh mục</h2><p>Xếp hạng các khoản chi trong tháng</p></div></div>${spends.length?`<div class="report-list">${spends.map((it,i)=>`<div class="legend-row"><div class="legend-name"><span class="muted" style="font-size:10px;min-width:17px">${String(i+1).padStart(2,'0')}</span><span class="budget-icon" style="background:${it.cat.color}38;color:${it.cat.color};height:35px;width:35px">${icons(it.cat.icon,'icon-sm')}</span><span>${escapeHtml(it.cat.name)} <small class="muted">· ${Math.round(it.value/Math.max(total,1)*100)}%</small></span></div><b>${fullMoney(it.value)}</b></div>`).join('')}</div>`:emptyBlock('chart-pie','Chưa có dữ liệu','Thêm giao dịch chi tiêu để xem thống kê.')}</section><section class="card"><div class="section-head"><div><h2>Chi tiêu theo thời gian</h2><p>Lũy kế trong ${monthLabel(ui.month).toLowerCase()}</p></div></div>${lineChart(ui.month)}<div class="chart-note"><span>Tính tổng đến từng ngày trong tháng</span></div></section></div><div class="space-top" style="display:flex;justify-content:flex-end"><button class="btn btn-outline" data-action="export-csv">${icons('download','icon-sm')} Xuất giao dịch CSV</button></div>`;}
-function renderSettings(){return `${renderIntro()}<div class="grid grid-2"><div><section class="card"><div class="section-head"><div><h2>Cá nhân hóa</h2><p>Không gian quản lý tiền của riêng bạn</p></div></div><div class="settings-row"><div class="settings-row-content"><span class="settings-icon">${icons('hand')}</span><div><strong>Tên hiển thị</strong><p>Cách Mộc chào bạn trên trang tổng quan</p></div></div><button class="btn btn-outline btn-small" data-action="edit-name">${escapeHtml(state.settings.name||'Bạn')} ${icons('edit','icon-xs')}</button></div><div class="settings-row"><div class="settings-row-content"><span class="settings-icon">${icons('sun')}</span><div><strong>Chủ đề giao diện</strong><p>Chọn màu sáng hay tối tùy thói quen</p></div></div><select id="theme-select" class="setting-select" aria-label="Chủ đề"><option value="light" ${state.settings.theme!=='dark'?'selected':''}>☀️ Sáng</option><option value="dark" ${state.settings.theme==='dark'?'selected':''}>🌙 Tối</option></select></div><div class="settings-row"><div class="settings-row-content"><span class="settings-icon">${icons('shield')}</span><div><strong>Lưu dữ liệu riêng tư</strong><p>Giao dịch lưu ngay trên thiết bị này bằng localStorage. Chưa có đồng bộ đám mây.</p></div></div><span style="font-size:10px;color:var(--green-2);font-weight:800">Cục bộ</span></div></section>
+function renderSettings(){return `${renderIntro()}<div class="grid grid-2"><div><section class="card"><div class="section-head"><div><h2>Cá nhân hóa</h2><p>Sắp xếp thu chi theo cách dễ dàng nhất</p></div></div><div class="settings-row"><div class="settings-row-content"><span class="settings-icon">${icons('hand')}</span><div><strong>Tên hiển thị</strong><p>Tên Tamy dùng để chào bạn</p></div></div><button class="btn btn-outline btn-small" data-action="edit-name">${escapeHtml(state.settings.name||'Bạn')} ${icons('edit','icon-xs')}</button></div><div class="settings-row"><div class="settings-row-content"><span class="settings-icon">${icons('sun')}</span><div><strong>Chủ đề giao diện</strong><p>Chọn màu sáng hay tối tùy thói quen</p></div></div><select id="theme-select" class="setting-select" aria-label="Chủ đề"><option value="light" ${state.settings.theme!=='dark'?'selected':''}>☀️ Sáng</option><option value="dark" ${state.settings.theme==='dark'?'selected':''}>🌙 Tối</option></select></div><div class="settings-row"><div class="settings-row-content"><span class="settings-icon">${icons('shield')}</span><div><strong>Lưu dữ liệu riêng tư</strong><p>Giao dịch lưu ngay trên thiết bị này bằng localStorage. Chưa có đồng bộ đám mây.</p></div></div><span style="font-size:10px;color:var(--green-2);font-weight:800">Cục bộ</span></div></section>
  <section class="card space-top"><div class="section-head"><div><h2>Danh mục tùy chỉnh</h2><p>Thêm danh mục phù hợp cuộc sống của bạn</p></div><button class="btn btn-outline btn-small" data-action="add-category">${icons('plus','icon-sm')} Thêm</button></div><div class="overline" style="margin:13px 0 9px">CHI TIÊU</div><div class="chip-list">${state.categories.filter(c=>c.type==='expense').map(catChip).join('')}</div><div class="overline" style="margin:20px 0 9px">THU NHẬP</div><div class="chip-list">${state.categories.filter(c=>c.type==='income').map(catChip).join('')}</div></section></div>
- <div><section class="card"><div class="section-head"><div><h2>Dữ liệu & sao lưu</h2><p>Sao lưu thường xuyên để giữ lịch sử an toàn</p></div></div><div class="settings-row"><div class="settings-row-content"><span class="settings-icon">${icons('download')}</span><div><strong>Xuất bản sao lưu JSON</strong><p>Lưu toàn bộ ví, giao dịch, ngân sách và danh mục.</p></div></div><button class="btn btn-outline btn-small" data-action="export-json">Xuất</button></div><div class="settings-row"><div class="settings-row-content"><span class="settings-icon">${icons('upload')}</span><div><strong>Khôi phục bản sao lưu</strong><p>Nhập lại tệp JSON đã xuất từ Mộc (thay thế dữ liệu hiện tại).</p></div></div><button class="btn btn-outline btn-small" data-action="import-json">Nhập</button></div><div class="settings-row"><div class="settings-row-content"><span class="settings-icon">${icons('receipt')}</span><div><strong>Xuất danh sách giao dịch CSV</strong><p>Mở bằng Excel hoặc Google Sheets.</p></div></div><button class="btn btn-outline btn-small" data-action="export-csv">Xuất</button></div></section>
- <section class="card space-top"><div class="section-head"><div><h2>Bắt đầu lại</h2><p>Những hành động thay đổi dữ liệu trên máy</p></div></div><div class="settings-row"><div class="settings-row-content"><span class="settings-icon">${icons('refresh')}</span><div><strong>Nạp dữ liệu trải nghiệm</strong><p>Thay toàn bộ dữ liệu bằng ví dụ minh họa.</p></div></div><button class="btn btn-outline btn-small" data-action="reset-demo">Nạp mẫu</button></div><div class="settings-row"><div class="settings-row-content"><span class="settings-icon" style="color:var(--red)">${icons('trash')}</span><div><strong>Xóa toàn bộ dữ liệu</strong><p>Giữ danh mục mặc định và 2 ví trống, xóa mọi giao dịch.</p></div></div><button class="btn btn-danger btn-small" data-action="clear-data">Xóa hết</button></div></section></div></div><p class="muted" style="font-size:10px;text-align:center;padding:24px 4px 0">Mộc Finance · Phiên bản 1.0 · Ứng dụng chạy cục bộ, không liên kết tài khoản ngân hàng và không gửi dữ liệu lên máy chủ.</p>`;}
+ <div><section class="card"><div class="section-head"><div><h2>Dữ liệu & sao lưu</h2><p>Sao lưu thường xuyên để giữ lịch sử an toàn</p></div></div><div class="settings-row"><div class="settings-row-content"><span class="settings-icon">${icons('download')}</span><div><strong>Xuất bản sao lưu JSON</strong><p>Lưu toàn bộ ví, giao dịch, ngân sách và danh mục.</p></div></div><button class="btn btn-outline btn-small" data-action="export-json">Xuất</button></div><div class="settings-row"><div class="settings-row-content"><span class="settings-icon">${icons('upload')}</span><div><strong>Khôi phục bản sao lưu</strong><p>Nhập lại tệp JSON đã xuất từ Tamy (thay thế dữ liệu hiện tại).</p></div></div><button class="btn btn-outline btn-small" data-action="import-json">Nhập</button></div><div class="settings-row"><div class="settings-row-content"><span class="settings-icon">${icons('receipt')}</span><div><strong>Xuất danh sách giao dịch CSV</strong><p>Mở bằng Excel hoặc Google Sheets.</p></div></div><button class="btn btn-outline btn-small" data-action="export-csv">Xuất</button></div></section>
+ <section class="card space-top"><div class="section-head"><div><h2>Bắt đầu lại</h2><p>Những hành động thay đổi dữ liệu trên máy</p></div></div><div class="settings-row"><div class="settings-row-content"><span class="settings-icon">${icons('refresh')}</span><div><strong>Nạp dữ liệu trải nghiệm</strong><p>Thay toàn bộ dữ liệu bằng ví dụ minh họa.</p></div></div><button class="btn btn-outline btn-small" data-action="reset-demo">Nạp mẫu</button></div><div class="settings-row"><div class="settings-row-content"><span class="settings-icon" style="color:var(--red)">${icons('trash')}</span><div><strong>Xóa toàn bộ dữ liệu</strong><p>Giữ danh mục mặc định và 2 ví trống, xóa mọi giao dịch.</p></div></div><button class="btn btn-danger btn-small" data-action="clear-data">Xóa hết</button></div></section></div></div><p class="muted" style="font-size:10px;text-align:center;padding:24px 4px 0">Tamy Ví tài chính · Phiên bản 2.0 · Ứng dụng chạy cục bộ, không liên kết tài khoản ngân hàng và không gửi dữ liệu lên máy chủ.</p>`;}
 function catChip(c){const deletable=!CATEGORIES.some(d=>d.id===c.id) && !state.transactions.some(t=>t.categoryId===c.id)&&!state.budgets.some(b=>b.categoryId===c.id);return `<span class="category-chip"><span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:${c.color}"></span>${escapeHtml(c.name)}${deletable?`<button data-action="delete-category" data-id="${escapeHtml(c.id)}" aria-label="Xóa ${escapeHtml(c.name)}">${icons('close','icon-xs')}</button>`:''}</span>`;}
 function openModal(kind,id=null,preset={}){
  let draft={};
@@ -268,10 +415,10 @@ function renderTransactionModal(){const d=ui.draft,edit=!!ui.modal.id,type=d.typ
  <div class="form-row"><div class="form-field"><label for="tx-date" class="form-label">Ngày giao dịch</label><input id="tx-date" name="date" data-field="date" class="form-control" type="date" value="${escapeHtml(d.date)}" required /></div><div class="form-field"><label for="tx-note" class="form-label">Ghi chú</label><input id="tx-note" name="note" data-field="note" class="form-control" maxlength="120" placeholder="Ví dụ: Ăn trưa" value="${escapeHtml(d.note)}" /></div></div>${modalFormFooter(edit,edit?'Lưu thay đổi':'Lưu giao dịch')}</form>`;
 }
 function renderWalletModal(){const d=ui.draft,edit=!!ui.modal.id;return `${modalHeading(edit?'Chỉnh sửa ví':'Tạo ví mới','Theo dõi tiền ở từng nơi riêng biệt')}<form id="wallet-form" class="modal-content"><div class="form-field"><label for="wallet-name" class="form-label">Tên ví</label><input id="wallet-name" class="form-control" name="name" data-field="name" maxlength="45" required placeholder="Ví dụ: Ngân hàng ACB" value="${escapeHtml(d.name)}"/></div><div class="form-field"><label for="wallet-opening" class="form-label">Số dư ban đầu (đ)</label><input id="wallet-opening" class="form-control mono-num" name="opening" data-field="opening" inputmode="numeric" autocomplete="off" placeholder="0" value="${d.opening!==''?money(d.opening):''}"/></div><div class="form-field"><label class="form-label" for="wallet-icon">Biểu tượng</label><select id="wallet-icon" class="form-control" data-field="icon" name="icon">${[['wallet','Ví tiền'],['bank','Ngân hàng'],['piggy','Tiết kiệm'],['gift','Quỹ riêng']].map(([v,l])=>`<option value="${v}" ${d.icon===v?'selected':''}>${l}</option>`).join('')}</select></div><div class="form-field"><label class="form-label">Màu ví</label>${renderColorPicker(d.color)}</div>${modalFormFooter(edit,edit?'Lưu thay đổi':'Tạo ví')}</form>`;}
-function renderBudgetModal(){const d=ui.draft,edit=!!ui.modal.id;return `${modalHeading(edit?'Chỉnh sửa ngân sách':'Tạo ngân sách',`Lập kế hoạch cho ${monthLabel(d.month||ui.month).toLowerCase()}`)}<form id="budget-form" class="modal-content"><div class="form-field"><label for="budget-category" class="form-label">Danh mục chi tiêu</label><select class="form-control" id="budget-category" name="categoryId" data-field="categoryId">${state.categories.filter(c=>c.type==='expense').map(c=>`<option value="${escapeHtml(c.id)}" ${d.categoryId===c.id?'selected':''}>${escapeHtml(c.name)}</option>`).join('')}</select></div><div class="form-field"><label for="budget-amount" class="form-label">Giới hạn mỗi tháng (đ)</label><input id="budget-amount" class="form-control mono-num" name="limit" data-field="limit" inputmode="numeric" autocomplete="off" placeholder="Ví dụ: 2.000.000" value="${d.limit?money(d.limit):''}" required/></div><p class="modal-note">Nếu đã có ngân sách cho danh mục này trong tháng, Mộc sẽ cập nhật hạn mức đang có.</p>${modalFormFooter(edit,edit?'Cập nhật':'Lưu ngân sách')}</form>`;}
+function renderBudgetModal(){const d=ui.draft,edit=!!ui.modal.id;return `${modalHeading(edit?'Chỉnh sửa ngân sách':'Tạo ngân sách',`Lập kế hoạch cho ${monthLabel(d.month||ui.month).toLowerCase()}`)}<form id="budget-form" class="modal-content"><div class="form-field"><label for="budget-category" class="form-label">Danh mục chi tiêu</label><select class="form-control" id="budget-category" name="categoryId" data-field="categoryId">${state.categories.filter(c=>c.type==='expense').map(c=>`<option value="${escapeHtml(c.id)}" ${d.categoryId===c.id?'selected':''}>${escapeHtml(c.name)}</option>`).join('')}</select></div><div class="form-field"><label for="budget-amount" class="form-label">Giới hạn mỗi tháng (đ)</label><input id="budget-amount" class="form-control mono-num" name="limit" data-field="limit" inputmode="numeric" autocomplete="off" placeholder="Ví dụ: 2.000.000" value="${d.limit?money(d.limit):''}" required/></div><p class="modal-note">Nếu đã có ngân sách cho danh mục này trong tháng, Tamy sẽ cập nhật hạn mức đang có.</p>${modalFormFooter(edit,edit?'Cập nhật':'Lưu ngân sách')}</form>`;}
 function renderCategoryModal(){const d=ui.draft;return `${modalHeading('Thêm danh mục','Phân loại các khoản thu chi theo nhu cầu')}<form id="category-form" class="modal-content"><div class="form-field"><label for="category-name" class="form-label">Tên danh mục</label><input class="form-control" id="category-name" name="name" data-field="name" maxlength="30" placeholder="Ví dụ: Du lịch" required value="${escapeHtml(d.name)}"/></div><div class="form-row"><div class="form-field"><label for="category-type" class="form-label">Loại</label><select class="form-control" id="category-type" name="type" data-field="type"><option value="expense">Chi tiêu</option><option value="income">Thu nhập</option></select></div><div class="form-field"><label for="category-icon" class="form-label">Biểu tượng</label><select class="form-control" id="category-icon" name="icon" data-field="icon">${[['gift','Món quà'],['food','Ăn uống'],['shopping','Mua sắm'],['car','Di chuyển'],['house','Nhà cửa'],['heart','Sức khỏe'],['book','Học tập'],['coffee','Cà phê'],['briefcase','Công việc'],['star','Ngôi sao'],['piggy','Tiết kiệm']].map(([v,l])=>`<option value="${v}" ${d.icon===v?'selected':''}>${l}</option>`).join('')}</select></div></div><div class="form-field"><label class="form-label">Chọn màu hiển thị</label>${renderColorPicker(d.color)}</div>${modalFormFooter(false,'Thêm danh mục')}</form>`;}
 function renderColorPicker(current){return `<div class="color-picker">${COLORS.map(c=>`<button type="button" class="color-choice ${current===c?'active':''}" data-action="choose-color" data-color="${c}" style="background:${c}" aria-label="Chọn màu ${c}" aria-pressed="${current===c}"></button>`).join('')}</div>`;}
-function renderNameModal(){return `${modalHeading('Tên hiển thị','Hãy để Mộc gọi bạn theo cách bạn thích')}<form id="name-form" class="modal-content"><div class="form-field"><label class="form-label" for="display-name">Tên của bạn</label><input id="display-name" class="form-control" name="name" maxlength="35" required value="${escapeHtml(ui.draft.name)}"/></div>${modalFormFooter(false,'Lưu tên')}</form>`;}
+function renderNameModal(){return `${modalHeading('Tên hiển thị','Hãy để Tamy gọi bạn theo cách bạn thích')}<form id="name-form" class="modal-content"><div class="form-field"><label class="form-label" for="display-name">Tên của bạn</label><input id="display-name" class="form-control" name="name" maxlength="35" required value="${escapeHtml(ui.draft.name)}"/></div>${modalFormFooter(false,'Lưu tên')}</form>`;}
 function renderConfirmModal(){const d=ui.draft;return `${modalHeading(d.title||'Xác nhận') }<div class="modal-content"><p class="confirm-text">${escapeHtml(d.message||'Bạn có chắc chắn không?')}</p>${d.warning?`<div class="confirm-warning">${icons('alert','icon-sm')} ${escapeHtml(d.warning)}</div>`:''}<div class="form-footer"><button type="button" class="btn btn-outline" data-action="close-modal">Hủy</button><button type="button" class="btn ${d.danger?'btn-danger':'btn-primary'}" data-action="confirm-apply">${icons('check','icon-sm')} ${escapeHtml(d.accept||'Xác nhận')}</button></div></div>`;}
 function renderModal(){const root=document.getElementById('modal-root');if(!root)return;if(!ui.modal){root.innerHTML='';document.body.style.overflow='';return;}let inner='';switch(ui.modal.kind){case'transaction':inner=renderTransactionModal();break;case'wallet':inner=renderWalletModal();break;case'budget':inner=renderBudgetModal();break;case'category':inner=renderCategoryModal();break;case'name':inner=renderNameModal();break;case'confirm':inner=renderConfirmModal();break;}root.innerHTML=`<div class="modal-overlay" id="modal-overlay"><div class="modal-dialog" role="dialog" aria-modal="true" aria-label="${escapeHtml(ui.modal.kind)}">${inner}</div></div>`;document.body.style.overflow='hidden';}
 function showError(msg){const node=document.getElementById('form-error');if(node)node.textContent=msg;else toast(msg,'alert');}
@@ -316,7 +463,7 @@ function downloadFile(name,mime,contents){const blob=new Blob([contents],{type:m
 function exportJSON(){downloadFile(`moc-finance-backup-${localToday()}.json`,'application/json;charset=utf-8',JSON.stringify(state,null,2));toast('Đã tạo tệp sao lưu JSON','download');}
 function exportCSV(){const rows=[['Ngày','Loại','Số tiền (VND)','Danh mục','Ví','Ví đích','Ghi chú']];for(const t of [...state.transactions].sort((a,b)=>b.date.localeCompare(a.date))){rows.push([t.date,t.type==='expense'?'Chi tiêu':t.type==='income'?'Thu nhập':'Chuyển ví',t.amount,t.type==='transfer'?'Chuyển ví':category(t.categoryId).name,t.type==='transfer'?wallet(t.fromWalletId).name:wallet(t.walletId).name,t.type==='transfer'?wallet(t.toWalletId).name:'',t.note||'']);}const csv='\ufeff'+rows.map(row=>row.map(v=>{let cell=String(v??'');if(/^[\s]*[=+@-]/.test(cell))cell="'"+cell;return '"'+cell.replace(/"/g,'""')+'"';}).join(',')).join('\r\n');downloadFile(`moc-finance-giao-dich-${localToday()}.csv`,'text/csv;charset=utf-8',csv);toast('Đã xuất danh sách giao dịch','download');}
 let pendingImport=null;
-function safeImportedState(obj){if(!validateState(obj))throw Error('Tệp không đúng định dạng sao lưu của Mộc.');if(obj.wallets.length>150||obj.categories.length>500||obj.transactions.length>100000||obj.budgets.length>5000)throw Error('Tệp quá lớn hoặc không hợp lệ.');
+function safeImportedState(obj){if(!validateState(obj))throw Error('Tệp không đúng định dạng sao lưu của Tamy.');if(obj.wallets.length>150||obj.categories.length>500||obj.transactions.length>100000||obj.budgets.length>5000)throw Error('Tệp quá lớn hoặc không hợp lệ.');
  const ids=new Set(),categoryIds=new Set();
  const wallets=obj.wallets.map(w=>{if(!w||typeof w.id!=='string'||!w.id||ids.has(w.id)||typeof w.name!=='string'||!Number.isFinite(Number(w.opening)))throw Error('Ví trong tệp không hợp lệ.');ids.add(w.id);return {id:w.id.slice(0,120),name:w.name.slice(0,45),opening:Math.trunc(Number(w.opening)),icon:ICONS[w.icon]?w.icon:'wallet',color:COLORS.includes(w.color)?w.color:COLORS[0]};});
  const cats=obj.categories.map(c=>{if(!c||typeof c.id!=='string'||!c.id||categoryIds.has(c.id)||!['income','expense'].includes(c.type)||typeof c.name!=='string')throw Error('Danh mục trong tệp không hợp lệ.');categoryIds.add(c.id);return {id:c.id.slice(0,120),name:c.name.slice(0,30),type:c.type,icon:ICONS[c.icon]?c.icon:'gift',color:/^#[a-f0-9]{6}$/i.test(c.color)?c.color:'#bdcfc4'};});

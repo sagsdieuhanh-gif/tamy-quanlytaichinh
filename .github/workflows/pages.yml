@@ -1,4 +1,4 @@
-name: Deploy Mộc Finance to GitHub Pages
+name: Deploy Tamy Ví tài chính to GitHub Pages
 
 on:
   push:
