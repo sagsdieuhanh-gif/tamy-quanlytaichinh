@@ -29,7 +29,7 @@ Nên xuất sao lưu JSON định kỳ, đặc biệt trước khi đổi điệ
 
 ## Triển khai
 
-Repository dùng GitHub Pages → GitHub Actions. Workflow `Deploy Mộc Finance to GitHub Pages` có thể giữ tên cũ để tránh thay đổi quy trình xuất bản; ứng dụng hiển thị tên mới Tamy Ví tài chính.
+Repository dùng GitHub Pages → GitHub Actions. Workflow `Deploy Tamy Ví tài chính to GitHub Pages` tự động xuất bản phiên bản mới sau mỗi lần cập nhật nhánh main.
 
 Mã nguồn thuần HTML/CSS/JavaScript, không cần build. Để thử trên máy:
 
