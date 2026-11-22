@@ -4,6 +4,14 @@
 
 🌐 **Website:** https://sagsdieuhanh-gif.github.io/tamy-quanlytaichinh/
 
+## Tamy Studio v3 — giao diện mới
+
+Thiết kế lại từ bố cục: sidebar xanh mực trên desktop, giao diện sáng tối giản trên điện thoại, số dư là điểm nhấn, ba nút ghi Chi / Thu / Chuyển ví dễ bấm và lịch sử giao dịch được đặt trước biểu đồ. Các trang Thẻ tín dụng, Ngân sách, Báo cáo, Tamy Smart và Cài đặt vẫn giữ nghiệp vụ cũ.
+
+**Đã kiểm thử:** giao diện 350px, 390px, 1440px không tràn ngang, mở nhập chi tiêu, thêm thẻ, quẹt thẻ, trả nợ, Tamy Smart, và trường hợp không hạch toán trả thẻ thành chi tiêu lần hai. Script không có lỗi khi tải.
+
+**Dữ liệu:** giữ nguyên khóa `moc-finance-v1` cùng sao lưu IndexedDB; chưa có đăng nhập/đồng bộ đám mây. Chỉ lưu trên thiết bị; xuất sao lưu JSON định kỳ.
+
 ## Tính năng
 
 - Ghi **chi tiêu**, **thu nhập** hoặc **chuyển tiền giữa các ví** chỉ trong vài thao tác.
