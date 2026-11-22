@@ -1,0 +1,39 @@
+name: Verify Tamy Credit & Smart
+
+on:
+  push:
+    branches:
+      - feature/tamy-credit-smart
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate browser JavaScript and backward compatibility
+        run: |
+          node <<'NODE'
+          const fs = require('node:fs');
+          const assert = require('node:assert/strict');
+          const html = fs.readFileSync('index.html', 'utf8');
+          const match = html.match(/<script>([\s\S]*?)<\/script>/);
+          assert(match, 'Missing app JavaScript');
+          fs.writeFileSync('/tmp/tamy-app.js', match[1]);
+          for (const required of [
+            "const STORAGE_KEY = 'moc-finance-v1'",
+            "function renderCreditCards()",
+            "function renderSmart()",
+            "function cardDebt(",
+            "function cardDueInfo(",
+            "function commitCreditEntry(",
+            "creditCards:[],creditEntries:[]",
+            "Không phải AI tạo sinh",
+          ]) assert(html.includes(required), 'Missing feature: ' + required);
+          assert(fs.readFileSync('service-worker.js','utf8').includes('tamy-credit-smart-v2-3'), 'Outdated PWA cache');
+          NODE
+          node --check /tmp/tamy-app.js
