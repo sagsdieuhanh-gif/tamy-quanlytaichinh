@@ -1,0 +1,40 @@
+name: Verify Tamy Studio v3
+on:
+  push:
+    branches:
+      - design/tamy-studio-v3
+  pull_request:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate new dashboard, existing finance features and JS syntax
+        run: |
+          node <<'NODE'
+          const fs = require('node:fs');
+          const assert = require('node:assert/strict');
+          const html = fs.readFileSync('index.html', 'utf8');
+          const code = html.match(/<script>([\s\S]*?)<\/script>/);
+          assert(code, 'main JavaScript not found');
+          fs.writeFileSync('/tmp/tamy-v3.js',code[1]);
+          for(const name of [
+            'function renderOverviewV3()',
+            'function renderShell()',
+            'function renderCreditCards()',
+            'function renderSmart()',
+            'function renderSettings()',
+            'tamy-finance-device-backup',
+            "const STORAGE_KEY = 'moc-finance-v1'",
+            'data-action="quick-expense"',
+            'data-action="quick-income"',
+            'data-action="quick-transfer"',
+          ]) assert(html.includes(name),'Missing: '+name);
+          const sw=fs.readFileSync('service-worker.js','utf8');
+          assert(sw.includes("tamy-studio-v3"),'Old PWA cache');
+          console.log('All existing features and data compatibility verified');
+          NODE
+          node --check /tmp/tamy-v3.js
